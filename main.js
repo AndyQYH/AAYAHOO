@@ -7,6 +7,7 @@ const express = require('express') //import express server
 const app = express()              // get the express app
 const expressLayouts = require('express-ejs-layouts')//import express layouts
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 
 const indexRouter = require('./routes/index')
@@ -19,6 +20,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
+app.use(methodOverride('_method')) //used for add/delete the book data
 
 const mongoose = require('mongoose') //database configuration library for mongoDB
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
